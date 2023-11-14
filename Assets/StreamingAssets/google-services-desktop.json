@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1021440248691",
+    "firebase_url": "https://capstoneunity-2e70f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "capstoneunity-2e70f",
+    "storage_bucket": "capstoneunity-2e70f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021440248691:android:3aec484a7248b89b6e5306",
+        "android_client_info": {
+          "package_name": "com.capstone1.submarine"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ-yc-XIlAZolbf5yRwooBpndl257cyAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
