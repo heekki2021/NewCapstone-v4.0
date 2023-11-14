@@ -63,11 +63,5 @@ public class Shooting : MonoBehaviour
     }
 
 
-   // public void flipF()
-   // {
-   //     if (public bool flip1 => subCon.)
-   //     {
-
-   //     }
-   // }
+ 
 }
