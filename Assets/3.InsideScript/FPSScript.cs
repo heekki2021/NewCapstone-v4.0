@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
+interface IInteractable
+{
+    public void Interact();
+}
 
 [RequireComponent(typeof(CharacterController))]
 public class FPSScript : MonoBehaviour
 {
 
+
+    public Camera fpsCam;
+
+    [Header("FPS")]
     public Camera playerCamera;
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
@@ -27,8 +36,7 @@ public class FPSScript : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+       
     }
 
     // Update is called once per frame
@@ -49,7 +57,7 @@ public class FPSScript : MonoBehaviour
         #endregion
 
         #region Handles Jumping
-        if(Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpPower;
         }
@@ -60,7 +68,7 @@ public class FPSScript : MonoBehaviour
 
 
 
-        if(!characterController.isGrounded)
+        if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }

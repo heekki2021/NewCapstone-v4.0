@@ -1,40 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.iOS.Extensions.Common;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SubmarineManager : MonoBehaviour
+public class SubmarineManager : Singleton<SubmarineManager> , ISceneTransition
 {
 
     public float speedPower;
     public float jumpPower;
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     bool facingRight = true;
     float moveInput;
 
-    string scenename = "Inside";
-    private float timePressed = 0;
-    private bool isFunctionCalled = false;
-    
 
+
+
+    public void OnSceneChanging(int sceneIndex)
+    {
+       if(sceneIndex == 1)
+        {
+            Instance.gameObject.SetActive(true);
+        } else if (sceneIndex == 2)
+        {
+            Instance.gameObject.SetActive(false);
+        }
+    }
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody>();       
     }
+
+
+    float forceGravity = 30f;
+    private void FixedUpdate()
+    {
+        rb.AddForce(Vector3.up * forceGravity);
+
+        moveInput = Input.GetAxis("Horizontal");
+        Flip();
+
+
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveInput * speedPower, rb.velocity.y);
-        Flip();
+        rb.velocity = new Vector3(moveInput * speedPower, rb.velocity.y);;
         Jump();
-        SceneChanging();
 
     }
 
@@ -49,26 +68,11 @@ public class SubmarineManager : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+     if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = Vector2.down * jumpPower; // (0, -1)
+            rb.velocity = Vector3.down * jumpPower; // (0, -1)
         }
     }
     
-    void SceneChanging()
-    {
-        if (Input.GetKey(KeyCode.E))
-        {
-            timePressed += Time.deltaTime;
-            if(timePressed >= 3f && !isFunctionCalled) {
-                SceneManager1.Instance.LoadScene(scenename);
-                isFunctionCalled = true; 
-            }
-        }
-        else
-        {
-            timePressed = 0;
-            isFunctionCalled = false;
-        }
-    }
+
 }

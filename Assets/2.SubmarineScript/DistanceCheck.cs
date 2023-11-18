@@ -25,7 +25,7 @@ public class DistanceCheck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //현재 플레이어 위치와 시작 위이치 사이의 거리를 계산
+        //현재 플레이어 위치와 시작 위치 사이의 거리를 계산
         float distance = Vector3.Distance(startPosition, player.position);
 
         //거리를 UI에 표시 (0.00형식)
